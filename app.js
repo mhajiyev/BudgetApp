@@ -1,15 +1,5 @@
 var budgetController = (function (){
-	/*
-	var x = 23;
-	var add = function (a){
-		return x+a;
-	}
-
-	return {
-		publicTest: function (b){
-			return add(b);
-		}
-	}*/
+	
 	var Expense = function(ID,description,value){
 		this.ID = ID;
 		this.description = description;
@@ -103,11 +93,6 @@ var UIController = (function() {
 
 var controller = (function (budgetCtrl,UICtrl){
    
-   // var z = budgetCtrl.add(3);
-  /*var z = budgetCtrl.publicTest(5);
-   return {anotherPublic: function (){
-   	console.log(z);
-   }}*/
    var setupEventListeners = function(){
 
    		var DOM = UICtrl.getDOMstrings();
