@@ -62,6 +62,7 @@ var budgetController = (function (){
 
 			if (index !== -1){
 				data.allItems[type].splice(index,1);
+				data.budget-=id;
 			}
 		},
 
@@ -148,6 +149,11 @@ var UIController = (function() {
 			fieldsArr[0].focus(); // return the cursor to descriptioon field
 			
 		},
+
+		deleteListItem: function(selectorID){
+			var temp = document.getElementById(selectorID);
+			temp.parentNode.removeChild(temp);
+		},
 		displayBudget: function(obj){
 			document.querySelector(DOMstrings.budgetLabel).textContent = obj.budget;
 			document.querySelector(DOMstrings.incomeLabel).textContent = obj.totalInc;
@@ -226,8 +232,9 @@ var controller = (function (budgetCtrl,UICtrl){
    			//delete the item from data structure
    			budgetCtrl.deleteItem(type,ID);
    			//deleting from UI
-
+   			UICtrl.deleteListItem(itemID);
    			//updating/show new budget
+   			updateBudget();
    	}
    };
 
