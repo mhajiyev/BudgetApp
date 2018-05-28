@@ -55,14 +55,15 @@ var budgetController = (function (){
 		},
 
 		deleteItem: function(type, id){
-			var ids = data.allItems[type].map(function(current){
-				return current.id;
-			});
-			var index = ids.indexOf(id);
-
+			var index = -1;
+			for (var i=0;i<data.allItems[type].length;i++){
+				if (data.allItems[type][i].ID == id) index = i;
+			}
+			
+			//console.log(index);
 			if (index !== -1){
 				data.allItems[type].splice(index,1);
-				data.budget-=id;
+				//data.budget-=data.allItems[type][index];
 			}
 		},
 
@@ -133,7 +134,7 @@ var UIController = (function() {
              htmlCode = '<div class="item clearfix" id="exp-%id%"><div class="item__description">%description%</div><div class="right clearfix"><div class="item__value">%value%</div><div class="item__percentage">21%</div><div class="item__delete"><button class="item__delete--btn"><i class="ion-ios-close-outline"></i></button></div></div></div>';
 			}
 			// Replacing the placeholder text with some actual data
-			newHtml = htmlCode.replace('%id%',obj.id);
+			newHtml = htmlCode.replace('%id%',obj.ID);
 			newHtml = newHtml.replace('%description%',obj.description);
 			newHtml = newHtml.replace('%value%',obj.value);
 			//Insert the HTML into DOM
@@ -228,7 +229,8 @@ var controller = (function (budgetCtrl,UICtrl){
    			splitID = itemID.split('-');
    			type = splitID[0];
    			ID = parseInt(splitID[1]);
-
+   			console.log(type);
+   			console.log(ID);
    			//delete the item from data structure
    			budgetCtrl.deleteItem(type,ID);
    			//deleting from UI
